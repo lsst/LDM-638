@@ -1,0 +1,273 @@
+\documentclass[SE,toc,lsstdraft]{lsstdoc}
+
+% We use commands to make it easy to find where parameter names and units
+% are defined in the tables, and to allow hyphenation.
+\newcommand{\paramname}[1]{\hspace{0pt}#1}
+\newcommand{\unitname}[1]{\hspace{0pt}#1}
+
+\setcounter{secnumdepth}{5}
+
+%% Retrieve date and model version
+\setDocUpstreamLocation{MagicDraw SysML}
+\setDocUpstreamVersion{138}
+
+\date{2018-06-07}
+
+%% Allow arbitrary latex to be inserted at the end of the document.
+%% Define a new version of this command in metadata.tex. It will
+%% be run before the references are displayed.
+\newcommand{\addendum}{}
+
+%% Define the document title, authors, handle, and change record
+\input metadata.tex
+
+% Environment for displaying the parameter tables in
+% a consistent manner. No arguments as there are no
+% captions or labels.
+\newenvironment{parameters}[0]{%
+\setlength\LTleft{0pt}
+\setlength\LTright{\fill}
+\begin{small}
+\begin{longtable}[]{|p{0.49\textwidth}|l|p{0.6in}|p{1.70in}@{}|}
+
+\hline \textbf{Description} & \textbf{Value} & \textbf{Unit} & \textbf{Name} \\ \hline
+\endhead
+
+\hline \multicolumn{4}{r}{\emph{Continued on next page}} \\
+\endfoot
+
+\hline\hline
+\endlastfoot
+}{%
+\hline
+\end{longtable}
+\end{small}
+}
+
+\begin{document}
+\maketitle
+
+\section{Header Service}
+
+\subsection{Fulfill requirements of a Commandable SAL Component (CSC)}
+
+\label{DMS-PSHS-REQ-0001}
+\textbf{ID:} DMS-PSHS-REQ-0001
+
+\textbf{Specification:}
+The Header Service shall behave as a CSC following the command patterns described in \citeds{LSE-70}.
+
+\textbf{Discussion:}
+The CSCs have a common command model, using the cross-subsystem “start” command to set up an operational mode, and cross subsystem commands to enable and disable operations in the selected mode as described in \citeds{LSE-70}
+
+\subsection{Critical System}
+
+\label{DMS-PSHS-REQ-0002}
+\textbf{ID:} DMS-PSHS-REQ-0002
+
+\textbf{Specification:}
+The Header Service shall be considered a critical systems for observatory operations and will reside within the EFD computer cluster
+
+\textbf{Discussion:}
+It is considered a service within the critical operations enclave.
+
+\subsection{Write Headers for all images taken by all Cameras supported by LSST}
+
+\label{DMS-PSHS-REQ-0003}
+\textbf{ID:} DMS-PSHS-REQ-0003
+
+\textbf{Specification:}
+The Header Service shall write header files for all (100%) images taken by Cameras (LSSTCam, ComCam, AuxTel and Test Stand)
+
+\textbf{Discussion:}
+Write headers at the cadence required for different observing mode (bias, flats, science)
+
+\subsection{Produce Header for L1 Complete TestStand at NCSA}
+
+\label{DMS-PSHS-REQ-0004}
+\textbf{ID:} DMS-PSHS-REQ-0004
+
+\textbf{Specification:}
+The Header Service shall write header files for the Complete TestStand at NCSA at the cadence required for bias, flats and for science observing.
+
+\textbf{Discussion:}
+Write headers at the cadence required for different observing mode (bias, flats, science)
+
+\subsection{Produce Header for the AuxTel Spectrograph}
+
+\label{DMS-PSHS-REQ-0005}
+\textbf{ID:} DMS-PSHS-REQ-0005
+
+\textbf{Specification:}
+The Header Service shall write header files for the AuxTel Spectrograph at the cadence required for bias, flats and for science observing.
+
+\textbf{Discussion:}
+Write headers at the cadence required for different observing mode (bias, flats, science)
+
+\subsection{Produce Headers for ComCam}
+
+\label{DMS-PSHS-REQ-0006}
+\textbf{ID:} DMS-PSHS-REQ-0006
+
+\textbf{Specification:}
+The Header Service shall write header files for ComCam at the cadence required for bias, flats and for science observing for a full raft with 9 CCDs
+
+\textbf{Discussion:}
+Write headers at the cadence required for different observing mode (bias, flats, science)
+
+\subsection{Produce Headers for LSSTCam}
+
+\label{DMS-PSHS-REQ-0007}
+\textbf{ID:} DMS-PSHS-REQ-0007
+
+\textbf{Specification:}
+The Header Service shall write header files for LSSTCam at the cadence required for bias, flats and for science observing for a full camera exposure with 189 CCDs
+
+\textbf{Discussion:}
+Write headers at the cadence required for different observing mode (bias, flats, science)
+
+\subsection{Ability to capture metadata at the beginning of exposure}
+
+\label{DMS-PSHS-REQ-0008}
+\textbf{ID:} DMS-PSHS-REQ-0008
+
+\textbf{Specification:}
+The header service shall be able to capture and store Events or Telemetry before the start of an integration
+
+\textbf{Discussion:}
+The name of the filter is an example for this type of meta-data
+
+\subsection{Ability to capture metadata during of exposure integration}
+
+\label{DMS-PSHS-REQ-0009}
+\textbf{ID:} DMS-PSHS-REQ-0009
+
+\textbf{Specification:}
+The header service shall be able to capture and store Events or Telemetry that happen during the image integration time
+
+\textbf{Discussion:}
+For example, the airmass during the exposure integration.
+
+\subsection{Ability to capture metadata at end of readout}
+
+\label{DMS-PSHS-REQ-0010}
+\textbf{ID:} DMS-PSHS-REQ-0010
+
+\textbf{Specification:}
+The header service shall be able to capture and store Events or Telemetry that happen after the end of readout.
+
+\textbf{Discussion:}
+The actual exposure time is an example of these types of meta-data
+
+\subsection{Write header and Publish Event after end of telemetry event}
+
+\label{DMS-PSHS-REQ-0011}
+\textbf{ID:} DMS-PSHS-REQ-0011
+
+\textbf{Specification:}
+The header service shall write the header file(s) immediatly after receiving the end-of-Telemetry Event for the Camera Device and shall emit a LargeFileObjectAvailable Event that will notify the EFD of the existence of a new header file.
+
+\textbf{Discussion:}
+The Event anouncing that a Large File Object (LFO) is available should also contain a unique ID that will be used to match images (pixels) from the DAQ with the header meta-data.
+
+\subsection{Write header and Publish Event within specified time of the end-of-telemetry Event}
+
+\label{DMS-PSHS-REQ-0012}
+\textbf{ID:} DMS-PSHS-REQ-0012
+
+\textbf{Specification:}
+The Header Service shall complete the writing of the header file and broadcast the announcement of the LFO Event within XXX miliseconds.
+
+\textbf{Discussion:}
+This constraint is required in order to keep up with science observations and acquisition of bias/flats frames and not slow down the production of images.
+
+\subsection{Adherence to the FITS Standard}
+
+\label{DMS-PSHS-REQ-0013}
+\textbf{ID:} DMS-PSHS-REQ-0013
+
+\textbf{Specification:}
+In order to allow better integration with other clients writing FITS files, the header files created by the Header Service shall be FITS compliant.
+
+\textbf{Discussion:}
+The header files will be skeleton FITS files, with pixel data on them.
+
+\subsection{Configuration of Header Keywords and source}
+
+\label{DMS-PSHS-REQ-0014}
+\textbf{ID:} DMS-PSHS-REQ-0014
+
+\textbf{Specification:}
+The Header Service shall have the ability to configure the header keywords that go into the header as well as the source of the metadata.he sources would be either Events or Telemetry to which the Header Service will subscribe and capture.
+
+\textbf{Discussion:}
+This configuration should be done via external files, hopefully YAML files that are easy to read and should be maintained under version control. Slowly-changing information can be stored statically in these files and versioned.
+
+\subsection{Sources of information}
+
+\label{DMS-PSHS-REQ-0015}
+\textbf{ID:} DMS-PSHS-REQ-0015
+
+\textbf{Specification:}
+The Header Service shall subscribe to and capture information from Events and Telemetry.
+
+\subsection{Produce header even if some meta-data not avaiable}
+
+\label{DMS-PSHS-REQ-0016}
+\textbf{ID:} DMS-PSHS-REQ-0016
+
+\textbf{Specification:}
+The Header Service shall write headers even with faulty or missing telemetry.
+
+\textbf{Discussion:}
+In the case that some telemetry is missing or not broadcast the header service should still write files and use FITS standard for undefined values for the missing meta-data.
+
+\subsection{Publish an Event if monitoring detects any failure of the service.}
+
+\label{DMS-PSHS-REQ-0017}
+\textbf{ID:} DMS-PSHS-REQ-0017
+
+\textbf{Specification:}
+The Header Service shall publish an event message describing the type of problem if a degraded service is detected.
+
+\subsection{Extract metadata from published configuration}
+
+\label{DMS-PSHS-REQ-0018}
+\textbf{ID:} DMS-PSHS-REQ-0018
+
+\textbf{Specification:}
+The Header Service shall be able to extract metadata from the configuration information published by other CSC such as Camera and TCS.
+
+\textbf{Discussion:}
+Some metadata that changes at nighly rate might be easier to acquire via configuration information published by individual CSCs.
+
+\subsection{Metadata Capture}
+
+\label{DMS-PSHS-REQ-0019}
+\textbf{ID:} DMS-PSHS-REQ-0019
+
+\textbf{Specification:}
+The Header Service shall capture at a minimum all metadata required by Prompt Processing, Archiving, and any relevant Summit systems.
+
+\subsection{Generate on-the-fly additional metadata requested by the Project Science Team.}
+
+\label{DMS-PSHS-REQ-0020}
+\textbf{ID:} DMS-PSHS-REQ-0020
+
+\textbf{Specification:}
+The header service shall be able to do light-weight computations to generate additional metadata as requested by the project in case it is not provided by other CSCs.
+
+\textbf{Discussion:}
+For example, calculating a mean airmass.
+
+\section{Pointing Prediction Publishing}
+
+\section{Level 1 DM Raw Image Archiving Service}
+
+\section{Observing-Critical Services}
+
+\addendum
+
+\bibliography{lsst,refs_ads}
+
+\end{document}
